@@ -1,5 +1,5 @@
 ﻿import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import Select from "../components/ui/Select";
 import { api } from "../api";
 import { useDating } from "../state/useDating";
 export default function SettingsPage() {
@@ -52,16 +52,7 @@ export default function SettingsPage() {
       <section className="d-panel d-form">
         <label>
           Тип знакомства
-          <span className="d-select">
-            <select
-              value={values.mode}
-              onChange={(e) => setValues({ ...values, mode: e.target.value })}
-            >
-              <option>Знакомства</option>
-              <option>Дружба</option>
-            </select>
-            <ChevronDown size={18} />
-          </span>
+          <Select label="Тип знакомства" value={values.mode} options={["Знакомства","Дружба"].map(value=>({value,label:value}))} onChange={mode=>setValues({...values,mode})}/>
         </label>
       </section>
       {toggles.map(([key, label, hint]) => (

@@ -22,7 +22,7 @@ export default function PersonPage() {
           {detail.city} · {detail.distance} км от вас
         </p>
       </section>
-      <ProfileContent person={detail} />
+
       {matches.some((p) => p.id === detail.id) ? (
         <button className="d-primary d-wide" onClick={telegram}>
           <Send size={18} /> Написать в Telegram
@@ -38,6 +38,7 @@ export default function PersonPage() {
             : "Поставить лайк"}
         </button>
       )}
+      <ProfileContent person={detail} />
     </>
   );
 }

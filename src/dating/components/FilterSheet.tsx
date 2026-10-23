@@ -1,6 +1,11 @@
-import {profileChoices,searchDetailFields,profileLimits} from '../profileSchema';
+import Select from "./ui/Select";
+import {
+  profileChoices,
+  searchDetailFields,
+  profileLimits,
+} from "../profileSchema";
 import { useEffect, useRef, useState } from "react";
-import { X, ChevronDown, Plus, Check, BadgeCheck } from "lucide-react";
+import { X, Plus, Check, BadgeCheck } from "lucide-react";
 import { api, defaults } from "../api";
 import type { Filters } from "../api";
 import { useDating } from "../state/useDating";
@@ -99,17 +104,15 @@ export default function FilterSheet() {
               <section>
                 <h3>Кого хотите встретить?</h3>
                 <div className="d-pref-box d-form">
-                  <span className="d-select">
-                    <select
-                      aria-label="Кого хотите встретить"
-                      value={f.gender}
-                      onChange={(e) => patch({ gender: e.target.value })}
-                    >
-                      <option>Все</option>
-                      {profileChoices.gender.map(value=><option key={value}>{value}</option>)}
-                    </select>
-                    <ChevronDown size={18} />
-                  </span>
+                  <Select
+                    label="Кого хотите встретить"
+                    value={f.gender}
+                    options={["Все", ...profileChoices.gender].map((value) => ({
+                      value,
+                      label: value,
+                    }))}
+                    onChange={(gender) => patch({ gender })}
+                  />
                 </div>
               </section>
               <section>
@@ -135,17 +138,26 @@ export default function FilterSheet() {
                 <h3>Как далеко?</h3>
                 <div className="d-pref-box">
                   <label className="d-distance-range">
-                    До {f.distance} км
-                    <input
-                      aria-label="Расстояние"
-                      type="range"
-                      min={1}
-                      max={100}
-                      value={f.distance}
-                      onChange={(e) =>
-                        patch({ distance: Number(e.target.value) })
-                      }
-                    />
+                    <strong>До {f.distance} км</strong>
+                    <span className="d-dual-range d-single-range">
+                      <span className="d-range-track" />
+                      <span
+                        className="d-range-fill"
+                        style={{
+                          right: `${100 - ((f.distance - 1) / 99) * 100}%`,
+                        }}
+                      />
+                      <input
+                        aria-label="Расстояние"
+                        type="range"
+                        min={1}
+                        max={100}
+                        value={f.distance}
+                        onChange={(e) =>
+                          patch({ distance: Number(e.target.value) })
+                        }
+                      />
+                    </span>
                   </label>
                 </div>
               </section>
@@ -180,11 +192,11 @@ export default function FilterSheet() {
                 </div>
               </section>
               <section>
-                <h3>Подтверждена ли анкета?</h3>
+                <h3>Верифицирована ли анкета?</h3>
                 <div className="d-pref-box d-pref-verified">
                   <BadgeCheck size={18} />
                   <Toggle
-                    label="Только подтверждённые"
+                    label="Только верифицированные"
                     checked={!!f.verifiedOnly}
                     onChange={(verifiedOnly) => patch({ verifiedOnly })}
                   />
@@ -193,19 +205,17 @@ export default function FilterSheet() {
               <section>
                 <h3>На каких языках общаются?</h3>
                 <div className="d-pref-box d-choice-chips">
-                  {profileChoices.languages.map(
-                    (x) => (
-                      <button
-                        type="button"
-                        key={x}
-                        aria-pressed={!!f.languages?.includes(x)}
-                        onClick={() => choose("languages", x)}
-                      >
-                        {x}
-                        {f.languages?.includes(x) && <Check size={14} />}
-                      </button>
-                    ),
-                  )}
+                  {profileChoices.languages.map((x) => (
+                    <button
+                      type="button"
+                      key={x}
+                      aria-pressed={!!f.languages?.includes(x)}
+                      onClick={() => choose("languages", x)}
+                    >
+                      {x}
+                      {f.languages?.includes(x) && <Check size={14} />}
+                    </button>
+                  ))}
                 </div>
               </section>
             </>
@@ -219,7 +229,7 @@ export default function FilterSheet() {
                     min={profileLimits.height.min}
                     max={profileLimits.height.max}
                     low={f.heightMin ?? 100}
-                    high={f.heightMax ?? 250}
+                    high={f.heightMax ?? 210}
                     unit=" см"
                     onChange={(heightMin, heightMax) =>
                       patch({ heightMin, heightMax })
@@ -235,20 +245,18 @@ export default function FilterSheet() {
               <section>
                 <h3>Что они ищут?</h3>
                 <div className="d-pref-box">
-                  {profileChoices.goal.map(
-                    (x) => (
-                      <label className="d-pref-check" key={x}>
-                        <span>{x}</span>
-                        <input
-                          type="checkbox"
-                          checked={(
-                            f.goals ?? (f.goal === "Любая" ? [] : [f.goal])
-                          ).includes(x)}
-                          onChange={() => choose("goals", x)}
-                        />
-                      </label>
-                    ),
-                  )}
+                  {profileChoices.goal.map((x) => (
+                    <label className="d-pref-check" key={x}>
+                      <span>{x}</span>
+                      <input
+                        type="checkbox"
+                        checked={(
+                          f.goals ?? (f.goal === "Любая" ? [] : [f.goal])
+                        ).includes(x)}
+                        onChange={() => choose("goals", x)}
+                      />
+                    </label>
+                  ))}
                   <Toggle
                     label="Показывать и с другими целями"
                     checked={!!f.goalsOutside}
@@ -260,19 +268,18 @@ export default function FilterSheet() {
                 <section key={field.key}>
                   <h3>{field.title}</h3>
                   <div className="d-pref-box d-form">
-                    <span className="d-select">
-                      <select
-                        aria-label={field.title}
-                        value={f[field.key] ?? ""}
-                        onChange={(e) => patch({ [field.key]: e.target.value })}
-                      >
-                        <option value="">Неважно</option>
-                        {field.options.map((x) => (
-                          <option key={x}>{x}</option>
-                        ))}
-                      </select>
-                      <ChevronDown size={18} />
-                    </span>
+                    <Select
+                      label={field.title}
+                      value={f[field.key] ?? ""}
+                      options={[
+                        { value: "", label: "Неважно" },
+                        ...field.options.map((value) => ({
+                          value,
+                          label: value,
+                        })),
+                      ]}
+                      onChange={(value) => patch({ [field.key]: value })}
+                    />
                   </div>
                 </section>
               ))}

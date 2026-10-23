@@ -1,4 +1,4 @@
-﻿import type { Person, Profile } from "./api";
+import type { Person, Profile } from "./api";
 export const selfPhoto =
   "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=85";
 export function toSelfPerson(profile: Profile): Person {
@@ -17,6 +17,5 @@ export function toSelfPerson(profile: Profile): Person {
     distance: 0,
     photo: profile.photos?.[0] || selfPhoto,
     incoming: false,
-    posts: [],
   };
 }

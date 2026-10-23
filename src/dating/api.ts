@@ -31,7 +31,6 @@ export type Person = Partial<
   interests: string[];
   photo: string;
   incoming: boolean;
-  posts: string[];
 };
 export type Filters = {
   ageOutside?: boolean;
@@ -140,10 +139,6 @@ export const people: Person[] = [
   ][i % 3],
   photo: `https://images.unsplash.com/${photos[i]}?auto=format&fit=crop&w=900&q=85`,
   incoming: i % 2 === 0,
-  posts: [
-    "Выходной без планов — иногда самый лучший план.",
-    "Маленькие моменты, ради которых хочется замедлиться.",
-  ],
 }));
 // Additional demo details and photos; some profiles intentionally stay sparse.
 people.forEach((person, index) => {

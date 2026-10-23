@@ -1,6 +1,7 @@
+import type { ReactNode } from "react";
 import ProfileContent from "../profile/ProfileContent";
 import { useRef, useState } from "react";
-import { Heart, MapPin, X } from "lucide-react";
+import { Heart, MapPin, X, BadgeCheck } from "lucide-react";
 import { useDating } from "../../state/useDating";
 
 import type { Person } from "../../api";
@@ -8,10 +9,12 @@ export default function SwipeProfileCard({
   current,
   own = false,
   goal,
+  afterPhoto,
 }: {
   current: Person;
   own?: boolean;
   goal?: string;
+  afterPhoto?: ReactNode;
 }) {
   const { busy, swipe } = useDating();
   const [drag, setDrag] = useState(0);
@@ -65,6 +68,7 @@ export default function SwipeProfileCard({
     >
       <div className="d-card d-card--hero">
         <img draggable={false} src={current.photo} alt={current.name} />
+        {current.verified && <span className="d-photo-verified" role="img" aria-label="Анкета подтверждена · демо" title="Анкета подтверждена · демо"><BadgeCheck size={22} aria-hidden="true" /></span>}
         <span className="d-online">
           {own
             ? "Моя анкета"
@@ -112,7 +116,8 @@ export default function SwipeProfileCard({
           )}
         </div>
       </div>
-      <ProfileContent person={current} own={own} goal={goal} />
+      {afterPhoto}
+      <ProfileContent person={current} own={own} goal={goal} showVerification={false} />
       {!own && (
         <div className="d-actions">
           <button
