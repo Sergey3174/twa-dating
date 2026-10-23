@@ -1,4 +1,4 @@
-﻿import {Heart,MessageCircleHeart,MapPin,Star} from 'lucide-react';
+﻿import {BadgeCheck,Languages,Heart,MessageCircleHeart,MapPin,Star} from 'lucide-react';
 import type {Person,Profile} from '../../api';
 import {detailFields,detailValue} from '../../profileDetails';
 export default function ProfileContent({person,own=false,goal}:{person:Person;own?:boolean;goal?:string}){
@@ -7,6 +7,8 @@ export default function ProfileContent({person,own=false,goal}:{person:Person;ow
  const extraPhotos=[...new Set(person.photos??[])].filter(photo=>photo!==person.photo);
  const photo=(index:number)=>extraPhotos[index]?<figure className="d-profile-photo"><img src={extraPhotos[index]} loading="lazy" draggable={false} alt={`${person.name} — фото ${index+2}`}/></figure>:null;
  return <>
+ {person.verified&&<section className="d-panel"><span className="d-verification"><BadgeCheck size={18}/>Анкета подтверждена · демо</span></section>}
+ {!!person.languages?.length&&<section className="d-panel d-profile-section"><h2>Языки общения</h2><div className="d-profile-chips">{person.languages.map(x=><span key={x}><Languages size={15}/>{x}</span>)}</div></section>}
   {(person.bio||facts.length>0)&&<section className="d-panel d-profile-section"><h2>Обо мне</h2>{person.bio&&<p>{person.bio}</p>}<div className="d-profile-chips">{facts.map(field=>{const Icon=field.icon;return <span key={field.key} title={field.label}><Icon size={15}/>{detailValue(details,field)}</span>})}</div></section>}
   {photo(0)}
   {(details.goal||!!person.qualities?.length)&&<section className="d-panel d-profile-section"><h2>Я ищу</h2><div className="d-profile-chips">{details.goal&&<span><Heart size={15}/>{details.goal}</span>}{person.qualities?.map(x=><span key={x}>{x}</span>)}</div></section>}

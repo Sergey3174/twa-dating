@@ -1,4 +1,4 @@
-import {matchesFilters,filterScore} from '../filterProfiles';
+import { matchesFilters, filterScore } from "../filterProfiles";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 import { api } from "../api";
@@ -53,7 +53,17 @@ export function useDatingState() {
     (p) => state?.likes.includes(p.id) && p.incoming,
   );
   const f = state?.filters;
-  const candidates = state && f ? people.filter(p=>!state.skipped.includes(p.id)&&!state.likes.includes(p.id)&&matchesFilters(p,f)).sort((a,b)=>filterScore(a,f)-filterScore(b,f)) : [];
+  const candidates =
+    state && f
+      ? people
+          .filter(
+            (p) =>
+              !state.skipped.includes(p.id) &&
+              !state.likes.includes(p.id) &&
+              matchesFilters(p, f),
+          )
+          .sort((a, b) => filterScore(a, f) - filterScore(b, f))
+      : [];
   const current = candidates[0];
   function swipe(p: Person, like: boolean) {
     void update(

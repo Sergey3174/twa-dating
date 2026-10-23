@@ -109,34 +109,44 @@
 .d-panel .d-profile-photo { margin:12px 0 0; }
 .d-preferences { padding:0; height:min(92dvh,900px); max-height:92dvh; overflow:hidden; }
 .d-preferences > form { display:flex; flex-direction:column; height:100%; }
-.d-pref-header { display:grid; grid-template-columns:44px 1fr 44px; align-items:center; padding:8px 12px; }
+.d-pref-header { display:grid; grid-template-columns:40px 1fr 40px; align-items:center; height:52px; padding:0 12px; flex-shrink:0; }
 .d-pref-header h2 { text-align:center; font-size:16px; }
 .d-pref-header button { display:grid; place-items:center; }
-.d-pref-tabs { display:flex; justify-content:center; gap:8px; padding:0 12px 12px; border-bottom:1px solid var(--separator); }
-.dating .d-pref-tabs button { min-height:32px; padding:6px 14px; border-radius:20px; color:var(--hint); }
-.d-pref-tabs button[aria-pressed=true] { background:var(--accent); color:var(--on-accent); }
-.d-pref-body { overflow-y:auto; min-height:0; flex:1; padding:16px 14px; }
-.d-pref-body section { margin-bottom:22px; }
-.d-pref-body h3 { font-size:13px; line-height:18px; margin:0 0 8px 4px; }
-.d-pref-box { padding:12px; border:1px solid var(--separator); border-radius:12px; background:var(--bg); }
-.d-pref-box .d-select select { background:transparent; border:0; }
+.d-pref-tabs { display:flex; gap:4px; margin:0 12px 8px; padding:3px; background:var(--fill); border-radius:10px; flex-shrink:0; }
+.dating .d-pref-tabs button { flex:1; min-height:30px; padding:4px 10px; border-radius:8px; color:var(--hint); font-size:13px; }
+.dating .d-pref-tabs button[aria-pressed=true] { background:var(--seg-on); color:var(--text); }
+.d-pref-body { overflow-y:auto; min-height:0; flex:1; padding:8px 12px; background:var(--section); }
+.d-pref-body section { margin-bottom:12px; }
+.d-pref-body h3 { font-size:12px; line-height:16px; font-weight:700; color:var(--hint); margin:0 0 6px 2px; }
+.d-pref-box { padding:10px 12px; border:1px solid var(--separator); border-radius:12px; background:var(--bg); }
+
 .d-pref-box .d-choice-chips { padding:0; }
-.d-pref-box.d-choice-chips { padding:12px; }
-.d-pref-help { font-size:11px; line-height:16px; color:var(--hint); margin:12px 0; }
-.d-filter-toggle { gap:12px; border-top:1px solid var(--separator); padding-top:10px; margin-top:10px; font-size:11px; line-height:16px; }
+.d-pref-box.d-choice-chips { padding:10px 12px; }
+.d-pref-help { font-size:11px; line-height:16px; color:var(--hint); margin:8px 0 0; }
+.d-filter-toggle { gap:10px; border-top:1px solid var(--separator); padding-top:8px; margin-top:6px; font-size:12px; line-height:16px; }
 .d-pref-check { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:44px; font-size:13px; border-bottom:1px solid var(--separator); }
 .d-pref-check input { width:18px; height:18px; accent-color:var(--accent); }
-.d-pref-footer { padding:8px 14px calc(12px + env(safe-area-inset-bottom)); background:var(--section); }
+.d-pref-footer { padding:8px 12px calc(8px + env(safe-area-inset-bottom)); background:var(--section); }
 .d-pref-footer .d-sheet-actions { padding-top:0; border:0; }
 .d-range-pair strong { font-size:13px; }
-.d-dual-range { position:relative; height:44px; margin:4px 10px; }
+.d-dual-range { position:relative; height:44px; margin:0 10px; }
 .d-range-track,.d-range-fill { position:absolute; top:21px; left:0; right:0; height:3px; background:var(--fill-strong); border-radius:2px; }
 .d-range-fill { background:var(--accent); }
 .d-dual-range input { position:absolute; inset:0; width:100%; height:44px; margin:0; appearance:none; background:transparent; pointer-events:none; z-index:3; }
 .d-dual-range input::-webkit-slider-thumb { appearance:none; width:22px; height:22px; border-radius:50%; background:var(--accent); pointer-events:auto; cursor:grab; }
 .d-dual-range input::-moz-range-thumb { width:22px; height:22px; border:0; border-radius:50%; background:var(--accent); pointer-events:auto; cursor:grab; }
 .d-dual-range input:focus-visible { outline:2px solid var(--accent-text); outline-offset:2px; }
-.d-distance-range { display:grid; gap:10px; font-size:13px; }
+.d-distance-range { display:grid; gap:6px; font-size:13px; }
 .d-distance-range input { width:100%; accent-color:var(--accent); }
 
 .d-match-actions .d-match-write { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:var(--accent); color:var(--on-accent); border-radius:0; padding:8px 4px; }
+
+.d-pref-body section:last-child { margin-bottom:0; }
+.d-pref-box.d-form { padding:0; border:0; background:transparent; }
+.d-pref-body .d-choice-chips { gap:6px; }
+.d-pref-body .d-choice-chips button { min-height:32px; padding:5px 9px; border-radius:8px; font-size:12px; line-height:18px; background:var(--chip); }
+.d-pref-body .d-choice-chips button[aria-pressed=true] { background:var(--accent-soft); color:var(--accent-text); }
+.d-pref-verified { display:flex; align-items:center; gap:8px; min-height:44px; padding:8px 12px; }
+.d-pref-verified > svg { flex-shrink:0; color:var(--hint); }
+.d-pref-verified .d-filter-toggle { flex:1; border:0; padding:0; margin:0; }
+.d-verification { display:flex; align-items:center; gap:8px; color:var(--accent-text); font-size:13px; }

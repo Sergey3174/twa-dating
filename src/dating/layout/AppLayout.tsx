@@ -15,7 +15,10 @@ export default function AppLayout() {
   return (
     <div
       className={
-        "dating" + ((location.pathname === "/" || location.pathname === "/profile/me") ? " dating--discover" : "")
+        "dating" +
+        (location.pathname === "/" || location.pathname === "/profile/me"
+          ? " dating--discover"
+          : "")
       }
     >
       <AppHeader />
