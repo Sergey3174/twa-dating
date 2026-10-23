@@ -24,6 +24,7 @@ export default function AppHeader() {
           : detail?.name ||
             tabs.find((t) => t.path === path)?.label ||
             "Анкета";
+  const isHomePage = path === "/";
   return (
     <header className="d-header">
       <button
@@ -51,16 +52,18 @@ export default function AppHeader() {
         </small>
       </div>
       {profileArea ? (
-        <button aria-label="Настройки" onClick={() => navigate("/settings")}>
+        <button aria-label="Настройки">
           <Settings size={22} />
         </button>
       ) : (
-        <button
-          aria-label="Фильтры поиска"
-          onClick={() => setFilters({ ...state.filters })}
-        >
-          <SlidersHorizontal size={22} />
-        </button>
+        isHomePage && (
+          <button
+            aria-label="Фильтры поиска"
+            onClick={() => setFilters({ ...state.filters })}
+          >
+            <SlidersHorizontal size={22} />
+          </button>
+        )
       )}
     </header>
   );

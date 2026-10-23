@@ -57,7 +57,8 @@ export default function ProfilePage() {
           <SlidersHorizontal size={20} /> Фильтры поиска
           <ChevronRight size={18} />
         </button>
-        <button onClick={() => navigate("/settings")}>
+        {/* <button onClick={() => navigate("/settings")}> */}
+        <button>
           <Settings size={20} /> Настройки
           <ChevronRight size={18} />
         </button>
