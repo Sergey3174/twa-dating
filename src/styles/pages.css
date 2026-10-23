@@ -13,8 +13,8 @@
 .d-swipe-profile .d-panel h2 { margin-bottom:12px; }
 .d-swipe-profile .d-actions { padding-top:32px; padding-bottom:32px; }
 .d-hero-actions { display:flex; align-items:center; justify-content:space-between; margin:8px 0 12px; }
-.d-card-info .d-hero-actions button { width:44px; height:44px; min-height:44px; flex:0 0 auto; padding:0; border-radius:50%; background:var(--accent); color:var(--on-accent); display:flex; align-items:center; justify-content:center; line-height:1; }
-.d-card-info .d-hero-actions .d-hero-star { width:56px; height:56px; }
+.d-card-info .d-hero-actions button { width:56px; height:56px; min-height:56px; flex:0 0 auto; padding:0; border-radius:50%; background:var(--section); color:var(--text); display:flex; align-items:center; justify-content:center; line-height:1; }
+.d-card-info .d-hero-actions .d-hero-like { background:var(--accent); color:var(--on-accent); }
 .d-hero-interests { padding:12px 14px; background:var(--section); border-radius:12px; }
 .d-hero-interests h2 { font-size:12px; line-height:16px; margin:0 0 10px; font-weight:500; }
 .d-hero-interests .d-tags span { background:var(--fill); border-radius:16px; }
@@ -28,14 +28,14 @@
 .d-match-person > span { min-width:0; }
 .d-match-person strong { display:block; font-size:14px; }
 .d-match-person small { display:block; margin-top:5px; color:var(--hint); font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.dating .d-match-send { display:flex; align-items:center; justify-content:center; gap:6px; background:var(--accent); color:var(--on-accent); border-radius:10px; font-size:12px; font-weight:700; line-height:16px; flex-shrink:0; min-height:34px; height:34px; padding:8px; }
 
-.d-match-actions { position:absolute; inset:0 0 0 auto; width:160px; display:flex; }
+
+.d-match-actions { position:absolute; inset:0 0 0 auto; width:240px; display:flex; }
 .d-match-actions button { width:80px; background:var(--elevated); font-size:12px; }
-.d-match-actions button:last-child { background:var(--destructive); color:var(--text); }
+.d-match-actions .d-match-report { background:var(--destructive); color:var(--text); }
 @media(prefers-reduced-motion:reduce) { .d-match-front { transition:none; } }
 
-.d-match-send svg { display:block; flex-shrink:0; }
+.d-match-write svg { display:block; flex-shrink:0; }
 .d-profile-summary { display:flex; align-items:center; gap:14px; padding:24px 14px; width:100%; text-align:left; }
 .d-profile-summary > svg { margin-left:auto; color:var(--hint); }
 .d-profile-summary h1 { font-size:18px; }
@@ -138,3 +138,5 @@
 .d-dual-range input:focus-visible { outline:2px solid var(--accent-text); outline-offset:2px; }
 .d-distance-range { display:grid; gap:10px; font-size:13px; }
 .d-distance-range input { width:100%; accent-color:var(--accent); }
+
+.d-match-actions .d-match-write { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:var(--accent); color:var(--on-accent); border-radius:0; padding:8px 4px; }

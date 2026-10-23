@@ -1,13 +1,13 @@
 import ProfileContent from '../profile/ProfileContent';
 import { useRef, useState } from 'react';
-import { Heart, Star, MessageCircleHeart, MapPin, X } from 'lucide-react';
+import { Heart, MapPin, X } from 'lucide-react';
 import { useDating } from '../../state/useDating';
-import { api } from '../../api';
+
 import type { Person } from '../../api';
 export default function SwipeProfileCard({ current, own = false, goal }: {
     current: Person; own?: boolean; goal?: string;
 }) {
-    const { busy, swipe, update } = useDating();
+    const { busy, swipe } = useDating();
     const [drag, setDrag] = useState(0);
     const start = useRef<{
         x: number;
@@ -27,8 +27,8 @@ export default function SwipeProfileCard({ current, own = false, goal }: {
                     <h1>{current.name}, {current.age}</h1>
                     <p><MapPin size={14}/> {current.city}{!own && ` · ${current.distance} км`}</p>
                     {!own && <div className="d-hero-actions">
-                      <button className="d-hero-like" aria-label="Нравится" title="Нравится" disabled={busy} onClick={() => swipe(current, true)}><MessageCircleHeart size={24}/></button>
-                      <button className="d-hero-star" aria-label="Отправить суперлайк" title="Суперлайк" disabled={busy} onClick={() => update(() => api.superlike(current.id), current.incoming ? 'Суперлайк отправлен — это взаимно!' : 'Суперлайк отправлен')}><Star size={28} fill="currentColor"/></button>
+                      <button className="d-hero-skip" aria-label="Пропустить" title="Пропустить" disabled={busy} onClick={() => swipe(current, false)}><X size={28}/></button>
+                      <button className="d-hero-like" aria-label="Нравится" title="Нравится" disabled={busy} onClick={() => swipe(current, true)}><Heart size={28}/></button>
                     </div>}
                     {current.interests.length>0&&<section className="d-hero-interests"><h2>О чём можем поговорить</h2><div className="d-tags">{current.interests.map(x => <span key={x}>{x}</span>)}</div></section>}
                   </div>
