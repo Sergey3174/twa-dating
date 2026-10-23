@@ -38,7 +38,7 @@ export default function MatchRow({
           tabIndex={open ? 0 : -1}
           onClick={onUnmatch}
         >
-          <Flag size={18} />
+          <X size={18} />
           <span>Анматч</span>
         </button>
         <button
@@ -47,7 +47,7 @@ export default function MatchRow({
           tabIndex={open ? 0 : -1}
           onClick={onReport}
         >
-          <X size={18} />
+          <Flag size={18} />
           <span>Репорт</span>
         </button>
         <button
