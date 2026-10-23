@@ -32,7 +32,10 @@
 
 .d-match-actions { position:absolute; inset:0 0 0 auto; width:240px; display:flex; }
 .d-match-actions button { width:80px; background:var(--elevated); font-size:12px; }
-.d-match-actions .d-match-report { background:var(--destructive); color:var(--text); }
+.d-match-actions .d-match-report { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:var(--destructive); color:var(--text); }
+.d-match-actions .d-match-unmatch { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;  }
+
+
 @media(prefers-reduced-motion:reduce) { .d-match-front { transition:none; } }
 
 .d-match-write svg { display:block; flex-shrink:0; }

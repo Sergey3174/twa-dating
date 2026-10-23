@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import type { Person } from "../../api";
+import { Flag, X } from "lucide-react";
 type Props = {
   person: Person;
   busy: boolean;
@@ -31,8 +32,14 @@ export default function MatchRow({
   return (
     <article className="d-match">
       <div className="d-match-actions" aria-hidden={!open}>
-        <button disabled={busy} tabIndex={open ? 0 : -1} onClick={onUnmatch}>
-          Анматч
+        <button
+          className="d-match-unmatch"
+          disabled={busy}
+          tabIndex={open ? 0 : -1}
+          onClick={onUnmatch}
+        >
+          <Flag size={18} />
+          <span>Анматч</span>
         </button>
         <button
           className="d-match-report"
@@ -40,7 +47,8 @@ export default function MatchRow({
           tabIndex={open ? 0 : -1}
           onClick={onReport}
         >
-          Репорт
+          <X size={18} />
+          <span>Репорт</span>
         </button>
         <button
           className="d-match-write"
