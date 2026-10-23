@@ -8,7 +8,4 @@ export default defineConfig({
     host: true,
     allowedHosts: ["arden-strychnic-pleasingly.ngrok-free.dev"],
   },
-  build: {
-    outDir: "build",
-  },
 });
