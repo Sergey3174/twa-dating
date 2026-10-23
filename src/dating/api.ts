@@ -1,4 +1,5 @@
 export type Person = Partial<Pick<Profile,'photos'|'favoriteInterest'|'causes'|'qualities'|'work'|'education'|'hometown'|'height'|'exercise'|'educationLevel'|'drinking'|'smoking'|'kids'|'hasKids'|'goal'>> & {
+    verified?:boolean; languages?:string[]; religion?:string;
     id: number;
     name: string;
     age: number;
@@ -12,6 +13,7 @@ export type Person = Partial<Pick<Profile,'photos'|'favoriteInterest'|'causes'|'
     posts: string[];
 };
 export type Filters = {
+ ageOutside?:boolean; interests?:string[]; interestsOutside?:boolean; verifiedOnly?:boolean; languages?:string[]; heightMin?:number; heightMax?:number; heightOutside?:boolean; goals?:string[]; goalsOutside?:boolean; kids?:string; hasKids?:string; religion?:string;
     min: number;
     max: number;
     distance: number;
@@ -48,6 +50,7 @@ const photos = ['photo-1534528741775-53994a69daeb', 'photo-1506794778202-cad84cf
 export const people: Person[] = ['Аня', 'Марк', 'София', 'Александр', 'Алиса', 'Полина'].map((name, i) => ({ id: i + 1, name, age: [25, 28, 24, 30, 27, 23][i], gender: [1, 3].includes(i) ? 'Мужчины' : 'Женщины', distance: [3, 7, 5, 12, 18, 4][i], city: 'Москва', bio: ['Собираю маленькие приключения. Кофе, выставки и прогулки без маршрута — мой идеальный выходной.', 'Архитектор. Люблю горы, хороший кофе и разговоры, которые не хочется заканчивать.', 'Снимаю жизнь на плёнку. Покажешь своё любимое место в городе?'][i % 3], interests: [['Кофе', 'Искусство', 'Путешествия'], ['Горы', 'Музыка', 'Спорт'], ['Фотография', 'Кино', 'Прогулки']][i % 3], photo: `https://images.unsplash.com/${photos[i]}?auto=format&fit=crop&w=900&q=85`, incoming: i % 2 === 0, posts: ['Выходной без планов — иногда самый лучший план.', 'Маленькие моменты, ради которых хочется замедлиться.'] }));
 // Additional demo details and photos; some profiles intentionally stay sparse.
 people.forEach((person,index)=>{
+ person.verified=index%2===0;person.languages=index%2?['Русский']:['Русский','Английский'];person.kids=index%2?'Пока не знаю':'Хочу детей';person.hasKids='Нет детей';person.religion=index%2?'Агностицизм':'Атеизм';
  person.goal=index%2?'Общение':'Отношения';
  if(index%2===0){person.height=String(162+index*3);person.exercise='Иногда';person.smoking='Не курю';person.drinking='Иногда';person.qualities=['Доброта','Чувство юмора'];person.favoriteInterest=person.interests[0];person.causes=['Экология'];person.photos=[person.photo,'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85','https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85'];}
 });

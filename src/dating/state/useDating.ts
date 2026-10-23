@@ -1,3 +1,4 @@
+import {matchesFilters,filterScore} from '../filterProfiles';
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 import { api } from "../api";
@@ -52,18 +53,7 @@ export function useDatingState() {
     (p) => state?.likes.includes(p.id) && p.incoming,
   );
   const f = state?.filters;
-  const candidates = people.filter(
-    (p) =>
-      !!state &&
-      !!f &&
-      !state.skipped.includes(p.id) &&
-      !state.likes.includes(p.id) &&
-      p.age >= f.min &&
-      p.age <= f.max &&
-      p.distance <= f.distance &&
-      (f.gender === "Все" || p.gender === f.gender) &&
-      (f.goal === "Любая" || (p.id % 2 ? "Отношения" : "Общение") === f.goal),
-  );
+  const candidates = state && f ? people.filter(p=>!state.skipped.includes(p.id)&&!state.likes.includes(p.id)&&matchesFilters(p,f)).sort((a,b)=>filterScore(a,f)-filterScore(b,f)) : [];
   const current = candidates[0];
   function swipe(p: Person, like: boolean) {
     void update(
